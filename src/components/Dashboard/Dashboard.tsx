@@ -1,5 +1,6 @@
 import PatientList from "../../features/patients/components/PatientList";
 import type { Patient } from "../../features/patients/types/Patient";
+import { useState } from "react";
 
 const patients: Patient[] = [
   {
@@ -29,6 +30,15 @@ const patients: Patient[] = [
 ];
 
 export function Dashboard() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredPatients = patients.filter((patient) => {
+    return (
+      patient.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      patient.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
   return (
     <main className="dashboard">
       <div className="page-header">
@@ -84,9 +94,16 @@ export function Dashboard() {
             <h3>Recent patients</h3>
             <p>Recently registered patients.</p>
           </div>
+          <div>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+          </div>
           <button className="secondary-button">View all</button>
         </div>
-        <PatientList patients={patients} />
+        <PatientList patients={filteredPatients} />
       </section>
     </main>
   );
