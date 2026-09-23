@@ -516,6 +516,84 @@ li {
   line-height: 1.6;
 }
 
+/* patient list and dashboard */
+.patient-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px 22px;
+
+  border-bottom: 1px solid #eef0f3;
+}
+
+.patient-card:last-child {
+  border-bottom: 0;
+}
+
+.patient-avatar {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #eef4ff;
+  color: #2563eb;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.patient-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.patient-info h4 {
+  margin: 0 0 4px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.patient-info span {
+  color: #8a93a3;
+  font-size: 11px;
+}
+
+.patient-status {
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.patient-status.active {
+  background: #ecfdf3;
+  color: #16803c;
+}
+
+.patient-status.inactive {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+
+
+
 /* =========================
    RESPONSIVE
    ========================= */

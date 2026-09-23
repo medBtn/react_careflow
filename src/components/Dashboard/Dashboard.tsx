@@ -1,3 +1,33 @@
+import PatientList from "../../features/patients/components/PatientList";
+import type { Patient } from "../../features/patients/types/Patient";
+
+const patients: Patient[] = [
+  {
+    id: 1,
+    firstName: "Sarah",
+    lastName: "Benali",
+    age: 34,
+    phone: "0550 12 34 56",
+    status: "active",
+  },
+  {
+    id: 2,
+    firstName: "Amine",
+    lastName: "Mansouri",
+    age: 42,
+    phone: "0661 45 67 89",
+    status: "active",
+  },
+  {
+    id: 3,
+    firstName: "Nadia",
+    lastName: "Kaci",
+    age: 29,
+    phone: "0770 98 76 54",
+    status: "inactive",
+  },
+];
+
 export function Dashboard() {
   return (
     <main className="dashboard">
@@ -7,14 +37,10 @@ export function Dashboard() {
 
           <h2>Dashboard</h2>
 
-          <p>
-            Welcome back, Mohamed. Here's what's happening today.
-          </p>
+          <p>Welcome back, Mohamed. Here's what's happening today.</p>
         </div>
 
-        <button className="primary-button">
-          + New appointment
-        </button>
+        <button className="primary-button">+ New appointment</button>
       </div>
 
       <section className="stats-grid">
@@ -26,9 +52,7 @@ export function Dashboard() {
 
           <strong>1,248</strong>
 
-          <span className="stat-description">
-            Patients registered
-          </span>
+          <span className="stat-description">Patients registered</span>
         </article>
 
         <article className="stat-card">
@@ -39,9 +63,7 @@ export function Dashboard() {
 
           <strong>24</strong>
 
-          <span className="stat-description">
-            Scheduled for today
-          </span>
+          <span className="stat-description">Scheduled for today</span>
         </article>
 
         <article className="stat-card">
@@ -52,9 +74,7 @@ export function Dashboard() {
 
           <strong>7</strong>
 
-          <span className="stat-description">
-            Patients in queue
-          </span>
+          <span className="stat-description">Patients in queue</span>
         </article>
       </section>
 
@@ -64,23 +84,10 @@ export function Dashboard() {
             <h3>Recent patients</h3>
             <p>Recently registered patients.</p>
           </div>
-
-          <button className="secondary-button">
-            View all
-          </button>
+          <button className="secondary-button">View all</button>
         </div>
-
-        <div className="empty-state">
-          <div className="empty-icon">♙</div>
-
-          <h4>No patients yet</h4>
-
-          <p>
-            Patient records will appear here once we connect
-            our patient data.
-          </p>
-        </div>
+        <PatientList patients={patients} />
       </section>
     </main>
-  )
+  );
 }
