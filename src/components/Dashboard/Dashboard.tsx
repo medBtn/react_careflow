@@ -39,6 +39,16 @@ export function Dashboard() {
     );
   });
 
+  const totalPatients = patients.length;
+  const activePatients = patients.filter(
+    (patient) => patient.status === "active",
+  ).length;
+
+  const inactivePatients = patients.filter(
+    (patient) => patient.status === "inactive",
+  ).length;
+
+
   return (
     <main className="dashboard">
       <div className="page-header">
@@ -60,31 +70,31 @@ export function Dashboard() {
             <span className="stat-icon">♙</span>
           </div>
 
-          <strong>1,248</strong>
+          <strong>{totalPatients}</strong>
 
           <span className="stat-description">Patients registered</span>
         </article>
 
         <article className="stat-card">
           <div className="stat-card-header">
-            <span>Today's appointments</span>
-            <span className="stat-icon">◷</span>
+            <span>Active patients</span>
+            <span className="stat-icon">✓</span>
           </div>
 
-          <strong>24</strong>
+          <strong>{activePatients}</strong>
 
-          <span className="stat-description">Scheduled for today</span>
+          <span className="stat-description">Currently active</span>
         </article>
 
         <article className="stat-card">
           <div className="stat-card-header">
-            <span>Waiting</span>
-            <span className="stat-icon">◌</span>
+            <span>Inactive patients</span>
+            <span className="stat-icon">○</span>
           </div>
 
-          <strong>7</strong>
+          <strong>{inactivePatients}</strong>
 
-          <span className="stat-description">Patients in queue</span>
+          <span className="stat-description">Not currently active</span>
         </article>
       </section>
 
@@ -92,23 +102,26 @@ export function Dashboard() {
         <div className="content-card-header">
           <div>
             <h3>Recent patients</h3>
-            <p>Recently registered patients.</p>
+
+            <p>
+              {filteredPatients.length}{" "}
+              {filteredPatients.length === 1 ? "patient" : "patients"} found
+            </p>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <div className="patient-toolbar">
-              <div className="search-box">
-                <span>⌕</span>
-                <input
-                  type="text"
-                  placeholder="Search patients..."
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                />
-              </div>
+          <div className="patient-toolbar">
+            <div className="search-box">
+              <span>⌕</span>
+              <input
+                type="text"
+                placeholder="Search patients..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
             </div>
-            <button className="secondary-button">View all</button>
           </div>
+          <button className="secondary-button">View all</button>
         </div>
+
         <PatientList patients={filteredPatients} />
       </section>
     </main>
