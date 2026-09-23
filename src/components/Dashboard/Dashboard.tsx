@@ -94,14 +94,20 @@ export function Dashboard() {
             <h3>Recent patients</h3>
             <p>Recently registered patients.</p>
           </div>
-          <div>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div className="patient-toolbar">
+              <div className="search-box">
+                <span>⌕</span>
+                <input
+                  type="text"
+                  placeholder="Search patients..."
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                />
+              </div>
+            </div>
+            <button className="secondary-button">View all</button>
           </div>
-          <button className="secondary-button">View all</button>
         </div>
         <PatientList patients={filteredPatients} />
       </section>
