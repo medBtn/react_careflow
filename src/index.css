@@ -596,8 +596,7 @@ li {
   =========================
    SEARCH BAR
   ========================= */
-*/
-.patient-toolbar {
+*/ .patient-toolbar {
   padding: 16px 22px;
 
   border-bottom: 1px solid #eef0f3;
@@ -649,6 +648,32 @@ li {
 
 .search-box input::placeholder {
   color: #a0a8b7;
+}
+
+/* =========================
+   LOADING
+   ========================= */
+
+.loading-state {
+  min-height: 180px;
+
+  display: grid;
+  place-items: center;
+
+  color: #8a93a3;
+
+  font-size: 12px;
+}
+
+/* =========================
+   ERROR 
+   ========================= */
+.error-state {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  color: #b42318;
+  font-size: 12px;
 }
 
 /* =========================

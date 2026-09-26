@@ -1,36 +1,13 @@
 import PatientList from "../../features/patients/components/PatientList";
+import { useEffect, useState } from "react";
 import type { Patient } from "../../features/patients/types/Patient";
-import { useState } from "react";
-
-const patients: Patient[] = [
-  {
-    id: 1,
-    firstName: "Sarah",
-    lastName: "Benali",
-    age: 34,
-    phone: "0550 12 34 56",
-    status: "active",
-  },
-  {
-    id: 2,
-    firstName: "Amine",
-    lastName: "Mansouri",
-    age: 42,
-    phone: "0661 45 67 89",
-    status: "active",
-  },
-  {
-    id: 3,
-    firstName: "Nadia",
-    lastName: "Kaci",
-    age: 29,
-    phone: "0770 98 76 54",
-    status: "inactive",
-  },
-];
+import { getPatients } from "../../features/patients/data/Patients";
 
 export function Dashboard() {
+  const [patients, setPatients] = useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const filteredPatients = patients.filter((patient) => {
     return (
@@ -48,6 +25,18 @@ export function Dashboard() {
     (patient) => patient.status === "inactive",
   ).length;
 
+  useEffect(() => {
+    getPatients()
+      .then((result) => {
+        setPatients(result);
+      })
+      .catch(() => {
+        setError("unable to solve this error ");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <main className="dashboard">
@@ -108,21 +97,28 @@ export function Dashboard() {
               {filteredPatients.length === 1 ? "patient" : "patients"} found
             </p>
           </div>
-          <div className="patient-toolbar">
-            <div className="search-box">
-              <span>⌕</span>
-              <input
-                type="text"
-                placeholder="Search patients..."
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-              />
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div className="patient-toolbar">
+              <div className="search-box">
+                <span>⌕</span>
+                <input
+                  type="text"
+                  placeholder="Search patients..."
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                />
+              </div>
             </div>
+            <button className="secondary-button">View all</button>
           </div>
-          <button className="secondary-button">View all</button>
         </div>
-
-        <PatientList patients={filteredPatients} />
+        {isLoading ? (
+          <div className="loading-state">loading patients ....</div>
+        ) : error ? (
+          <div className="error-state">{error}</div>
+        ) : (
+          <PatientList patients={filteredPatients} />
+        )}
       </section>
     </main>
   );
