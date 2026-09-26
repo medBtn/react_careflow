@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { PatientList } from '../../../features/patients/components/PatientList'
 import { PatientSearch } from '../../../features/patients/components/PatientSearch'
-import { getPatients } from '../../../features/patients/data/patients'
 import type { Patient } from '../../../features/patients/types/Patient'
 import { StatCard } from './StatCard'
 import { Check, Circle } from 'lucide-react'
+import { getPatients } from '../../../features/patients/api/PatientApi'
 
 export function Dashboard() {
   const [patients, setPatients] = useState<Patient[]>([])
@@ -13,17 +13,20 @@ export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+
+  
   useEffect(() => {
-    getPatients()
-      .then((data) => {
+    async function loadPatient(){
+      try {
+        const data = await getPatients();
         setPatients(data)
-      })
-      .catch(() => {
-        setError('Unable to load patients.')
-      })
-      .finally(() => {
+      } catch  {
+          setError('Unable to load patients.')
+      }finally{
         setIsLoading(false)
-      })
+      }
+    }
+   loadPatient();
   }, [])
 
   const filteredPatients = patients.filter((patient) => {
