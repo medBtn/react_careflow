@@ -1,4 +1,5 @@
 import { CalendarDays, LayoutDashboard, Settings, Users } from "lucide-react";
+import { NavLink } from "react-router";
 
 export function Sidebar() {
   return (
@@ -11,23 +12,35 @@ export function Sidebar() {
 
           <ul className="space-y-1">
             <li>
-              <button
-                type="button"
-                className="flex w-full items-center gap-3 rounded-lg bg-blue-50 px-3 py-2.5 text-left text-[13px] font-semibold text-blue-600"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition ${
+                    isActive
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`
+                }
               >
                 <LayoutDashboard className="size-4" />
                 Dashboard
-              </button>
+              </NavLink>
             </li>
 
             <li>
-              <button
-                type="button"
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[13px] font-medium text-slate-500 transition hover:bg-slate-50 hover:text-slate-900"
+              <NavLink
+                to="/patients"
+                className={({ isActive }) =>
+                  `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium transition ${
+                    isActive
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                  }`
+                }
               >
                 <Users className="size-4" />
                 Patients
-              </button>
+              </NavLink>
             </li>
 
             <li>

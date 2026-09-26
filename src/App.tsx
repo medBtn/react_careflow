@@ -1,6 +1,6 @@
+import { Outlet } from "react-router";
 import { Header } from "./components/Header/Header";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { Dashboard } from "./components/Dashboard/components/Dashboard";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
 
       <div className="flex min-h-[calc(100vh-76px)]">
         <Sidebar />
-        <Dashboard />
+        <Outlet />
       </div>
     </div>
   );
