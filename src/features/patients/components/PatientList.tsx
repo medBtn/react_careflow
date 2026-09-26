@@ -1,20 +1,19 @@
-import type { Patient } from "../types/Patient";
-import PatientCard from "./PatientCard";
+import type { Patient } from '../types/Patient'
+import { PatientCard } from './PatientCard'
 
 interface PatientListProps {
-    patients: Patient[];
+  patients: Patient[]
 }
 
-function PatientList({patients}: PatientListProps) {
+export function PatientList({ patients }: PatientListProps) {
   return (
     <div>
-        {
-            patients.map((patient)=>{
-                return <PatientCard patient = {patient}/>
-            })
-        }
+      {patients.map((patient) => (
+        <PatientCard
+          key={patient.id}
+          patient={patient}
+        />
+      ))}
     </div>
   )
 }
-
-export default PatientList
